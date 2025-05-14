@@ -3,7 +3,7 @@ A simple ManHunt plugin for servers.
 
 ## Description
 
-The goal of this mod is to experience a true reverse manhunt! One player is selected to become a hunter, while the others try to speedrun the game. The hunters goal is to stop them by any means necessary. When he dies, he gets to try again, while the others can just spectate.
+The goal of this plugin is to experience a reverse manhunt! One player is randomly selected to become a hunter, while the others try to speedrun the game. The hunters goal is to stop them by any means necessary. When he dies, he gets to try again, while the others can just spectate after dying.
 
 ## Starting the game
 
