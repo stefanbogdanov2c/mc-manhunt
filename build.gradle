@@ -19,6 +19,13 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT'
 }
 
+sourceSets {
+    main {
+        java.srcDirs = ['app/src/main/java']
+        resources.srcDirs = ['app/src/main/resources']
+    }
+}
+
 jar {
     archiveBaseName.set("HunterHardcore")
     destinationDirectory.set(file("$buildDir/libs"))
