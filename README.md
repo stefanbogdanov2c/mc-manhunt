@@ -16,4 +16,8 @@ To start the game, run the command
 
 Use `./gradlew build` to build the mod file. The file can be located in `build/libs/HunterHardcore-1.0.jar`
 
+## Server installation
 
+In the root folder of the server, simply create a folder named `plugin` and add the build `.jar` file.
+
+Make sure that the server is running Spigot

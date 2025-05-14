@@ -1,7 +1,7 @@
 name: HunterHardcore
 version: 1.0
 main: org.mystuff.HunterHardcorePlugin
-api-version: 1.20
+api-version: 1.21.1
 commands:
   starthunt:
     description: Start the hunter game
