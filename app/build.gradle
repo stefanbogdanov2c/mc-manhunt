@@ -1,30 +1,25 @@
-sourceSets {
-    main {
-        java {
-            srcDir 'app/src/main/java'
-        }
-        resources {
-            srcDir 'app/src/main/resources'
-        }
-    }
-}
-
 plugins {
     id 'java'
 }
 
-group = 'com.example'
+group = 'org.mystuff'
 version = '1.0'
+
+sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
-    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT'
 }
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+jar {
+    archiveBaseName.set("HunterHardcore")
+    destinationDirectory.set(file("$buildDir/libs"))
 }
