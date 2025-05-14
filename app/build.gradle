@@ -1,3 +1,14 @@
+sourceSets {
+    main {
+        java {
+            srcDir 'app/src/main/java'
+        }
+        resources {
+            srcDir 'app/src/main/resources'
+        }
+    }
+}
+
 plugins {
     id 'java'
 }
