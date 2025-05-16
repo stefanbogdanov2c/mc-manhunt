@@ -64,11 +64,13 @@ public class HunterHardcorePlugin extends JavaPlugin implements Listener {
                 hunterIds.add(hunter.getUniqueId());
                 hunter.setGameMode(GameMode.SURVIVAL);
                 hunter.sendMessage("You are a HUNTER! Unlimited respawns.");
+                hunter.setPlayerListName(null);
             }
 
             for (Player p : hunted) {
                 p.setGameMode(GameMode.SURVIVAL);
                 p.sendMessage("You are being hunted. One life only!");
+                p.setPlayerListName(null);
             }
 
             huntRunning = true;
