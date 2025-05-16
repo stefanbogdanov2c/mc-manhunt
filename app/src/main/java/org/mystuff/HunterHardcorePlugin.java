@@ -91,6 +91,7 @@ public class HunterHardcorePlugin extends JavaPlugin implements Listener {
                 p.teleport(p.getWorld().getSpawnLocation());
                 p.setGameMode(GameMode.SURVIVAL);
                 p.sendMessage("The hunt has been stopped. Game reset.");
+                p.setPlayerListName(p.getName());
             }
 
             Bukkit.broadcastMessage("The hunt has ended. All players reset.");
