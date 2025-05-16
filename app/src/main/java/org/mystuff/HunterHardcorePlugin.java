@@ -1,8 +1,10 @@
 package org.mystuff;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -17,7 +19,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class HunterHardcorePlugin extends JavaPlugin implements Listener {
 
-    private UUID hunterId = null;
+    private final Set<UUID> hunterIds = new HashSet<>();
+    private boolean huntRunning = false;
 
     @Override
     public void onEnable() {
@@ -28,6 +31,11 @@ public class HunterHardcorePlugin extends JavaPlugin implements Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("starthunt")) {
+            if (huntRunning) {
+                sender.sendMessage("Hunt already running.");
+                return true;
+            }
+
             List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 
             if (players.size() < 2) {
@@ -35,30 +43,55 @@ public class HunterHardcorePlugin extends JavaPlugin implements Listener {
                 return true;
             }
 
-            Player hunter = players.remove(new Random().nextInt(players.size()));
-            hunterId = hunter.getUniqueId();
-            hunter.sendMessage("You are the HUNTER! Unlimited respawns.");
+            int numHunters = 1;
+            if (args.length == 1) {
+                try {
+                    numHunters = Math.min(Integer.parseInt(args[0]), players.size() - 1);
+                    if (numHunters < 1) {
+                        numHunters = 1;
+                    }
+                } catch (NumberFormatException e) {
+                    sender.sendMessage("Invalid number of hunters. Defaulting to 1.");
+                }
+            }
 
-            for (Player p : players) {
+            Collections.shuffle(players);
+            List<Player> hunters = players.subList(0, numHunters);
+            List<Player> hunted = players.subList(numHunters, players.size());
+
+            hunterIds.clear();
+            for (Player hunter : hunters) {
+                hunterIds.add(hunter.getUniqueId());
+                hunter.setGameMode(GameMode.SURVIVAL);
+                hunter.sendMessage("You are a HUNTER! Unlimited respawns.");
+            }
+
+            for (Player p : hunted) {
                 p.setGameMode(GameMode.SURVIVAL);
                 p.sendMessage("You are being hunted. One life only!");
             }
 
-            Bukkit.broadcastMessage("The hunt has begun!");
+            huntRunning = true;
+            Bukkit.broadcastMessage("The hunt has begun with " + numHunters + " hunter(s)!");
             return true;
         }
 
         if (label.equalsIgnoreCase("stophunt")) {
-            // Reset all players to SURVIVAL and teleport to spawn
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                player.setGameMode(GameMode.SURVIVAL);
-                player.teleport(player.getWorld().getSpawnLocation());
-                player.sendMessage("The hunt has been stopped. You are no longer hunted.");
+            if (!huntRunning) {
+                sender.sendMessage("No hunt is currently running.");
+                return true;
             }
 
-            // Clear the hunter
-            hunterId = null;
-            Bukkit.broadcastMessage("The hunt has ended.");
+            huntRunning = false;
+            hunterIds.clear();
+
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.teleport(p.getWorld().getSpawnLocation());
+                p.setGameMode(GameMode.SURVIVAL);
+                p.sendMessage("The hunt has been stopped. Game reset.");
+            }
+
+            Bukkit.broadcastMessage("The hunt has ended. All players reset.");
             return true;
         }
 
@@ -67,17 +100,21 @@ public class HunterHardcorePlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        event.setDeathMessage(null); // disable death message
+        if (!huntRunning) {
+            return;
+        }
 
+        event.setDeathMessage(null);
         Player player = event.getEntity();
+
         Bukkit.getScheduler().runTask(this, () -> {
-            if (player.getUniqueId().equals(hunterId)) {
-                // respawn hunter
+            if (hunterIds.contains(player.getUniqueId())) {
+                // Hunters respawn normally
                 player.spigot().respawn();
                 player.setGameMode(GameMode.SURVIVAL);
                 player.sendMessage("Respawned as hunter.");
             } else {
-                // hunted player goes into spectator
+                // Hunted go spectator permanently
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage("You are dead. Spectator mode enabled.");
             }
