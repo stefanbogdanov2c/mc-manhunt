@@ -1,5 +1,5 @@
 name: HunterHardcore
-version: 1.0
+version: 1.1
 main: org.mystuff.HunterHardcorePlugin
 api-version: 1.21.1
 commands:
