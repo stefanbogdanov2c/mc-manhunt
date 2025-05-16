@@ -47,6 +47,21 @@ public class HunterHardcorePlugin extends JavaPlugin implements Listener {
             Bukkit.broadcastMessage("The hunt has begun!");
             return true;
         }
+
+        if (label.equalsIgnoreCase("stophunt")) {
+            // Reset all players to SURVIVAL and teleport to spawn
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.setGameMode(GameMode.SURVIVAL);
+                player.teleport(player.getWorld().getSpawnLocation());
+                player.sendMessage("The hunt has been stopped. You are no longer hunted.");
+            }
+
+            // Clear the hunter
+            hunterId = null;
+            Bukkit.broadcastMessage("The hunt has ended.");
+            return true;
+        }
+
         return false;
     }
 
