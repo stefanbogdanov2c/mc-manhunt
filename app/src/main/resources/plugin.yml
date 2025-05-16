@@ -6,3 +6,6 @@ commands:
   starthunt:
     description: Start the hunter game
     usage: /starthunt
+  stophunt:
+    description: Stop the hunter game
+    usage: /stophunt
