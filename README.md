@@ -1,5 +1,5 @@
 # mc-manhunt
-A simple ManHunt plugin for servers.
+A simple Manhunt plugin for servers.
 
 ## Description
 
