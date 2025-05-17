@@ -31,5 +31,5 @@ jobs:
       - name: Upload plugin jar
         uses: actions/upload-artifact@v4
         with:
-          name: hunter-hardcore-plugin
+          name: mc-manhunt-plugin
           path: build/libs/*.jar
