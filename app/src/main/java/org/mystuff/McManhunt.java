@@ -20,7 +20,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class HunterHardcorePlugin extends JavaPlugin implements Listener {
+public class McManhunt extends JavaPlugin implements Listener {
 
     private final Set<UUID> hunterIds = new HashSet<>();
     private boolean huntRunning = false;
