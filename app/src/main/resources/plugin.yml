@@ -9,3 +9,6 @@ commands:
   stophunt:
     description: Stop the hunter game
     usage: /stophunt
+  stophunt:
+    description: Tracks the nearest player
+    usage: /tracknearest
