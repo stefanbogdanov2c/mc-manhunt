@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.0.0] - 2025-05-17
+## [1.2.0] - 2025-05-17
+
+### Added
+
+- Added a workflow which triggers the building of the mod once a tag has been pushed on GitHub.
+
+## [1.1.0] - 2025-05-17
 
 ### Added
 
@@ -25,6 +31,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - The initial MC Reverse Manhunt release.
 
-[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/stefanbogdanov2c/mc-manhunt/tree/v1.0.0
