@@ -12,6 +12,11 @@ To start the game, run the command
 /starthunt
 ```
 
+## Other commands
+
+`/stophunt` - stops the hunt and makes all of the hunters normal players, respawns everybody at spawn
+`/tracknearest` - a hunter specific command, where the location of the nearest player is displayed. Can be used once every 2 minutes.
+
 ## Building the mod locally
 
 Use `./gradlew build` to build the mod file. The file can be located in `build/libs/HunterHardcore-1.0.jar`
