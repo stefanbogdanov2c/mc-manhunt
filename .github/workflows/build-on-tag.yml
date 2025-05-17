@@ -1,0 +1,29 @@
+name: Build plugin on tag
+
+on:
+  push:
+    tags:
+      - '*'  # triggers on any tag
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'  # or 8, depending on your plugin
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload plugin jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: hunter-hardcore-plugin
+          path: build/libs/*.jar
