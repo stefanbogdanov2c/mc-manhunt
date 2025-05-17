@@ -5,6 +5,9 @@ on:
     tags:
       - '*'  # triggers on any tag
 
+env:
+  PLUGIN_VERSION: ${{ github.ref_name }}
+
 jobs:
   build:
     runs-on: ubuntu-latest

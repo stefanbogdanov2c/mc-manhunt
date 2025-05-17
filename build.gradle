@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'org.mystuff'
-version = '1.1.0'
+version = System.getenv("PLUGIN_VERSION") ?: "1.0.0-SNAPSHOT"
 
 sourceCompatibility = JavaVersion.VERSION_17
 
@@ -27,6 +27,6 @@ sourceSets {
 }
 
 jar {
-    archiveBaseName.set("HunterHardcore")
+    archiveBaseName.set("McManhunt")
     destinationDirectory.set(file("$buildDir/libs"))
 }
