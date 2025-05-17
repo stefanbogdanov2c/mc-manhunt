@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.0] - 2025-05-17
+
+### Changed
+
+- Changed the mod name locally.
+- Changed the workflow and build.gradle file so now the tag is added dynamically.
+
 ## [1.2.2] - 2025-05-17
 
 ### Changed
@@ -43,8 +50,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - The initial MC Reverse Manhunt release.
 
-[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.2...HEAD
-[1.2.2]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.1...v.2.2
+[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.1...v1.3.0
+[1.2.2]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.0.0...v1.1.0
