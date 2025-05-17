@@ -7,11 +7,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-05-17
+
+### Added
+
+- Added a 'stophunt' command, which stops the hunt.
+- Added a 'tracknearest' command, a command only the hunters can use with a cooldown to find other players.
+
+### Changed
+
+- Hide the player names when clicking tab once the game has started.
+- 'starthunt' command now supports multiple hunters.
+
 ## [1.0.0] - 2025-05-14
 
 ### Added
 
 - The initial MC Reverse Manhunt release.
 
-[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/stefanbogdanov2c/mc-manhunt/tree/v1.0.0
