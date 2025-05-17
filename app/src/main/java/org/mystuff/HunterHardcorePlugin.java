@@ -2,13 +2,16 @@ package org.mystuff;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,6 +24,9 @@ public class HunterHardcorePlugin extends JavaPlugin implements Listener {
 
     private final Set<UUID> hunterIds = new HashSet<>();
     private boolean huntRunning = false;
+
+    private final Map<UUID, Long> hunterTrackCooldowns = new HashMap<>();
+    private static final long TRACK_COOLDOWN_MILLIS = 2 * 60 * 1000; // 2 minutes
 
     @Override
     public void onEnable() {
@@ -95,6 +101,77 @@ public class HunterHardcorePlugin extends JavaPlugin implements Listener {
             }
 
             Bukkit.broadcastMessage("The hunt has ended. All players reset.");
+            return true;
+        }
+
+        if (label.equalsIgnoreCase("tracknearest")) {
+            if (!(sender instanceof Player)) {
+                if (sender != null) {
+                    sender.sendMessage("Only players can use this command.");
+                }
+                return true;
+            }
+
+            Player hunter = (Player) sender;
+
+            if (!huntRunning || !hunterIds.contains(hunter.getUniqueId())) {
+                hunter.sendMessage("Only active hunters can use this command during a hunt.");
+                return true;
+            }
+
+            long now = System.currentTimeMillis();
+            Long lastUsed = hunterTrackCooldowns.get(hunter.getUniqueId());
+
+            if (lastUsed != null && (now - lastUsed) < TRACK_COOLDOWN_MILLIS) {
+                long secondsLeft = (TRACK_COOLDOWN_MILLIS - (now - lastUsed)) / 1000;
+                hunter.sendMessage("You must wait " + secondsLeft + " seconds before tracking again.");
+                return true;
+            }
+
+            Player nearest = null;
+            double nearestDistance = Double.MAX_VALUE;
+
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (p.equals(hunter)) {
+                    continue;
+                }
+                if (hunterIds.contains(p.getUniqueId())) {
+                    continue;
+                }
+                if (p.getGameMode() == GameMode.SPECTATOR) {
+                    continue;
+                }
+                if (!p.getWorld().equals(hunter.getWorld())) {
+                    continue;
+                }
+
+                Location hunterLoc = hunter.getLocation();
+                Location pLoc = p.getLocation();
+                if (hunterLoc != null && pLoc != null) {
+                    double dist = hunterLoc.distanceSquared(pLoc);
+                    if (dist < nearestDistance) {
+                        nearest = p;
+                        nearestDistance = dist;
+                    }
+                }
+            }
+
+            if (nearest == null) {
+                hunter.sendMessage("No hunted player found to track.");
+            } else {
+                Location loc = nearest.getLocation();
+                if (loc != null) {
+                    hunter.sendMessage("Nearest hunted: " + nearest.getName()
+                            + " at X: " + loc.getBlockX()
+                            + ", Y: " + loc.getBlockY()
+                            + ", Z: " + loc.getBlockZ());
+                    nearest.sendMessage("The hunter knows your location!");
+                    hunterTrackCooldowns.put(hunter.getUniqueId(), now);
+                } else {
+                    hunter.sendMessage("Could not determine the location of the nearest hunted player.");
+                }
+            }
+
             return true;
         }
 
