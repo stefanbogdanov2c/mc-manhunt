@@ -26,7 +26,7 @@ public class McManhunt extends JavaPlugin implements Listener {
     private boolean huntRunning = false;
 
     private final Map<UUID, Long> hunterTrackCooldowns = new HashMap<>();
-    private static final long TRACK_COOLDOWN_MILLIS = 2 * 60 * 1000; // 2 minutes
+    private static final long TRACK_COOLDOWN_MILLIS = 30 * 1000; // 30 seconds
 
     @Override
     public void onEnable() {
