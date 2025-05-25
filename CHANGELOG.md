@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.3.1] - 2025-05-17
+## [1.3.2] - 2025-05-25
 
 ### Changed
+
+- Changed the tracknearest timeout to 30sec instead of 2min.
+
+## [1.3.1] - 2025-05-17
+
+### Fixed
 
 - Fix tracknearest command not working.
 
@@ -56,7 +62,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - The initial MC Reverse Manhunt release.
 
-[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.0...HEAD
+[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.2...HEAD
+[1.3.2]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.1...v1.3.2
+[1.3.1]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.1...v1.3.0
 [1.2.2]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.2.0...v1.2.1
