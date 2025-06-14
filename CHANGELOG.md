@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Added the accuser role - the selected player can check if a player is a hunter, at the price of his life.
+
 ## [1.3.4] - 2025-06-14
 
 ### Added
