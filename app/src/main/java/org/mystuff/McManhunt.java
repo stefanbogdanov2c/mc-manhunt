@@ -197,6 +197,33 @@ public class McManhunt extends JavaPlugin implements Listener {
                 // Hunted go spectator permanently
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage("You are dead. Spectator mode enabled.");
+
+                // Check if any hunted players are still alive (not in spectator mode)
+                boolean huntedStillAlive = false;
+
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    if (!hunterIds.contains(p.getUniqueId())
+                            && p.getGameMode() != GameMode.SPECTATOR) {
+                        huntedStillAlive = true;
+                        break;
+                    }
+                }
+
+                if (!huntedStillAlive) {
+                    Bukkit.broadcastMessage("All hunted players are dead. Hunt is over.");
+
+                    huntRunning = false;
+                    hunterIds.clear();
+
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.teleport(p.getWorld().getSpawnLocation());
+                        p.setGameMode(GameMode.SURVIVAL);
+                        p.sendMessage("The hunt has been stopped. Game reset.");
+                        p.setPlayerListName(p.getName());
+                    }
+
+                    Bukkit.broadcastMessage("The hunt has ended. All players reset.");
+                }
             }
         });
     }
