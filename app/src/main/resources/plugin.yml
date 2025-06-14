@@ -12,3 +12,6 @@ commands:
   tracknearest:
     description: Tracks the nearest player
     usage: /tracknearest
+  accuse:
+    description: Accuse a player of being a hunter. Wrong accusation will result in the death of the accuser.
+    usage: /accuse <playerName>
