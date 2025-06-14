@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -28,6 +29,8 @@ public class McManhunt extends JavaPlugin implements Listener {
 
     private final Map<UUID, Long> hunterTrackCooldowns = new HashMap<>();
     private static final long TRACK_COOLDOWN_MILLIS = 30 * 1000; // 30 seconds
+
+    private UUID accuserId = null;
 
     World overworld = Bukkit.getWorlds().get(0);
     Location spawn = overworld.getSpawnLocation();
@@ -77,6 +80,16 @@ public class McManhunt extends JavaPlugin implements Listener {
                 hunter.setPlayerListName(null);
             }
 
+            // Choose a random hunted player to be the accuser
+            accuserId = null;
+            if (!hunted.isEmpty()) {
+                Player chosenAccuser = hunted.get((int) (Math.random() * hunted.size()));
+                accuserId = chosenAccuser.getUniqueId();
+                chosenAccuser.sendMessage(ChatColor.RED + "You are the ACCUSER.");
+                chosenAccuser.sendMessage(ChatColor.YELLOW + "Use " + ChatColor.GOLD + "/accuse <player>" + ChatColor.YELLOW + " to expose a hunter.");
+                chosenAccuser.sendMessage(ChatColor.DARK_RED + "⚠ Wrong accusation = INSTANT DEATH.");
+            }
+
             for (Player p : hunted) {
                 p.setGameMode(GameMode.SURVIVAL);
                 p.sendMessage("You are being hunted. One life only!");
@@ -95,6 +108,7 @@ public class McManhunt extends JavaPlugin implements Listener {
             }
 
             huntRunning = false;
+            accuserId = null;
             hunterIds.clear();
 
             for (Player p : Bukkit.getOnlinePlayers()) {
@@ -179,6 +193,40 @@ public class McManhunt extends JavaPlugin implements Listener {
             return true;
         }
 
+        if (label.equalsIgnoreCase("accuse")) {
+            Player accuser = (Player) sender;
+
+            if (!huntRunning) {
+                accuser.sendMessage("No hunt is currently running.");
+                return true;
+            }
+
+            if (accuserId == null || !accuser.getUniqueId().equals(accuserId)) {
+                accuser.sendMessage("You are not the designated accuser.");
+                return true;
+            }
+
+            if (args.length != 1) {
+                accuser.sendMessage("Usage: /accuse <playerName>");
+                return true;
+            }
+
+            Player accused = Bukkit.getPlayerExact(args[0]);
+            if (accused == null || !accused.isOnline()) {
+                accuser.sendMessage("Could not find player: " + args[0]);
+                return true;
+            }
+
+            if (hunterIds.contains(accused.getUniqueId())) {
+                Bukkit.broadcastMessage(accuser.getName() + " has discovered that " + accused.getName() + " is a HUNTER!");
+            } else {
+                accuser.setHealth(0.0);
+                Bukkit.broadcastMessage(accuser.getName() + " wrongly accused " + accused.getName() + " and died for it.");
+            }
+
+            return true;
+        }
+
         return false;
     }
 
@@ -229,6 +277,7 @@ public class McManhunt extends JavaPlugin implements Listener {
                     Bukkit.broadcastMessage("The winners are: " + winners);
 
                     huntRunning = false;
+                    accuserId = null;
                     hunterIds.clear();
 
                     for (Player p : Bukkit.getOnlinePlayers()) {
@@ -256,8 +305,8 @@ public class McManhunt extends JavaPlugin implements Listener {
 
         Bukkit.broadcastMessage("The Ender Dragon has been slain! The hunt is over. Hunters lost!");
 
-        // Reset game state
         huntRunning = false;
+        accuserId = null;
         hunterIds.clear();
 
         for (Player p : Bukkit.getOnlinePlayers()) {
