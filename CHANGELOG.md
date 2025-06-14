@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.5] - 2025-06-14
+
 ### Added
 
 - Added the accuser role - the selected player can check if a player is a hunter, at the price of his life.
+- Added a lightning sound when a hunted player dies.
 
 ## [1.3.4] - 2025-06-14
 
@@ -82,7 +85,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - The initial MC Reverse Manhunt release.
 
-[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.4...HEAD
+[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.5...HEAD
+[1.3.5]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.44...v1.3.5
 [1.3.4]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.3...v1.3.4
 [1.3.3]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.1...v1.3.2
