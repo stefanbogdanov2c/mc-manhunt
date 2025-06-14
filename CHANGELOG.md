@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Added a winning mechanism for the hunter players.
+
+### Changed
+
+- Changed the way respawning the players upon game completion is handled.
+
 ## [1.3.3] - 2025-06-14
 
 ### Added
