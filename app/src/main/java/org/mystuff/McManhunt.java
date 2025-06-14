@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -88,6 +89,10 @@ public class McManhunt extends JavaPlugin implements Listener {
                 chosenAccuser.sendMessage(ChatColor.RED + "You are the ACCUSER.");
                 chosenAccuser.sendMessage(ChatColor.YELLOW + "Use " + ChatColor.GOLD + "/accuse <player>" + ChatColor.YELLOW + " to expose a hunter.");
                 chosenAccuser.sendMessage(ChatColor.DARK_RED + "⚠ Wrong accusation = INSTANT DEATH.");
+                Location accuserLoc = chosenAccuser.getLocation();
+                if (accuserLoc != null) {
+                    chosenAccuser.playSound(accuserLoc, Sound.ENTITY_ENDER_DRAGON_GROWL, 1.0f, 1.0f);
+                }
             }
 
             for (Player p : hunted) {
