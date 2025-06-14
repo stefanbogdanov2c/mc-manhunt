@@ -255,6 +255,17 @@ public class McManhunt extends JavaPlugin implements Listener {
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage("You are dead. Spectator mode enabled.");
 
+                // Play lightning sound at every online player's location
+                for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    Location playerLoc = onlinePlayer.getLocation();
+                    if(playerLoc != null) {
+                        onlinePlayer.getWorld().playSound(playerLoc, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1.0f, 1.0f);
+                    }
+                }
+
+                // Notify all players that this player has died
+                Bukkit.broadcastMessage(player.getName() + " has died and is now a spectator.");
+
                 // Check if any hunted players are still alive (not in spectator mode)
                 boolean huntedStillAlive = false;
 
