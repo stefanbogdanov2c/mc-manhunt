@@ -239,4 +239,31 @@ public class McManhunt extends JavaPlugin implements Listener {
             }
         });
     }
+
+    @EventHandler
+    public void onEnderDragonDeath(org.bukkit.event.entity.EntityDeathEvent event) {
+        if (!huntRunning) {
+            return;
+        }
+
+        if (!(event.getEntity() instanceof org.bukkit.entity.EnderDragon)) {
+            return;
+        }
+
+        Bukkit.broadcastMessage("The Ender Dragon has been slain! The hunt is over. Hunters lost!");
+
+        // Reset game state
+        huntRunning = false;
+        hunterIds.clear();
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.teleport(p.getWorld().getSpawnLocation());
+            p.setGameMode(GameMode.SURVIVAL);
+            p.sendMessage("The hunt has been stopped. Game reset.");
+            p.setPlayerListName(p.getName());
+        }
+
+        Bukkit.broadcastMessage("The hunt has ended. All players reset.");
+    }
+
 }
