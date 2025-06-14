@@ -210,7 +210,19 @@ public class McManhunt extends JavaPlugin implements Listener {
                 }
 
                 if (!huntedStillAlive) {
-                    Bukkit.broadcastMessage("All hunted players are dead. Hunt is over.");
+                    // Build a list of online hunter names
+                    List<String> hunterNames = new ArrayList<>();
+                    for (UUID id : hunterIds) {
+                        Player hunter = Bukkit.getPlayer(id);
+                        if (hunter != null && hunter.isOnline()) {
+                            hunterNames.add(hunter.getName());
+                        }
+                    }
+
+                    String winners = String.join(", ", hunterNames);
+
+                    Bukkit.broadcastMessage("All hunted players are dead. The hunt is over.");
+                    Bukkit.broadcastMessage("The winners are: " + winners);
 
                     huntRunning = false;
                     hunterIds.clear();
