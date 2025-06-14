@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.6] - 2025-06-14
+
+### Changed
+
+- Changed the plugin.yml file.
+
 ## [1.3.5] - 2025-06-14
 
 ### Added
@@ -85,8 +91,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - The initial MC Reverse Manhunt release.
 
-[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.5...HEAD
-[1.3.5]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.44...v1.3.5
+[unreleased]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.6...HEAD
+[1.3.6]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.5...v1.3.6
+[1.3.5]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.4...v1.3.5
 [1.3.4]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.3...v1.3.4
 [1.3.3]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/stefanbogdanov2c/mc-manhunt/compare/v1.3.1...v1.3.2

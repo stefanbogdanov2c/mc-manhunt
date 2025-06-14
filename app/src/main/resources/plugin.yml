@@ -1,5 +1,5 @@
 name: mc-manhunt
-version: 1.3.5
+version: 1.3.6
 main: org.mystuff.McManhunt
 api-version: 1.21.1
 commands:
@@ -13,5 +13,5 @@ commands:
     description: Tracks the nearest player
     usage: /tracknearest
   accuse:
-    description: Accuse a player of being a hunter. Wrong accusation will result in the death of the accuser.
+    description: Accuse a player of being a hunter
     usage: /accuse <playerName>
