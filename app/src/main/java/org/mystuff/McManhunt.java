@@ -12,6 +12,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,6 +28,9 @@ public class McManhunt extends JavaPlugin implements Listener {
 
     private final Map<UUID, Long> hunterTrackCooldowns = new HashMap<>();
     private static final long TRACK_COOLDOWN_MILLIS = 30 * 1000; // 30 seconds
+
+    World overworld = Bukkit.getWorlds().get(0);
+    Location spawn = overworld.getSpawnLocation();
 
     @Override
     public void onEnable() {
@@ -94,7 +98,7 @@ public class McManhunt extends JavaPlugin implements Listener {
             hunterIds.clear();
 
             for (Player p : Bukkit.getOnlinePlayers()) {
-                p.teleport(p.getWorld().getSpawnLocation());
+                p.teleport(spawn);
                 p.setGameMode(GameMode.SURVIVAL);
                 p.sendMessage("The hunt has been stopped. Game reset.");
                 p.setPlayerListName(p.getName());
@@ -228,7 +232,7 @@ public class McManhunt extends JavaPlugin implements Listener {
                     hunterIds.clear();
 
                     for (Player p : Bukkit.getOnlinePlayers()) {
-                        p.teleport(p.getWorld().getSpawnLocation());
+                        p.teleport(spawn);
                         p.setGameMode(GameMode.SURVIVAL);
                         p.sendMessage("The hunt has been stopped. Game reset.");
                         p.setPlayerListName(p.getName());
@@ -257,7 +261,7 @@ public class McManhunt extends JavaPlugin implements Listener {
         hunterIds.clear();
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.teleport(p.getWorld().getSpawnLocation());
+            p.teleport(spawn);
             p.setGameMode(GameMode.SURVIVAL);
             p.sendMessage("The hunt has been stopped. Game reset.");
             p.setPlayerListName(p.getName());
